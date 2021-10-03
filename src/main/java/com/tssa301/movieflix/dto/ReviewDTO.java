@@ -1,9 +1,6 @@
 package com.tssa301.movieflix.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.tssa301.movieflix.entities.Review;
 
 public class ReviewDTO implements Serializable {
@@ -12,22 +9,24 @@ public class ReviewDTO implements Serializable {
 	private Long id;
 	private String text;
 	private Long movieId;
+	private UserDTO user;
 	
-	List<UserDTO> list = new ArrayList<>();
 	
 	public ReviewDTO() {
 	}
 
-	public ReviewDTO(Long id, String text, Long movieId) {
+	public ReviewDTO(Long id, String text, Long movieId, UserDTO user) {
 		this.id = id;
 		this.text = text;
 		this.movieId = movieId;
+		this.user = user;
 	}
 	
 	public ReviewDTO(Review entity) {
 		id = entity.getId();
 		text = entity.getText();
 		movieId = entity.getMovie().getId();
+		user = new UserDTO(entity.getUser());
 	}
 
 	public Long getId() {
@@ -54,7 +53,11 @@ public class ReviewDTO implements Serializable {
 		this.movieId = movieId;
 	}
 
-	public List<UserDTO> getList() {
-		return list;
+	public UserDTO getUser() {
+		return user;
+	}
+
+	public void setUser(UserDTO user) {
+		this.user = user;
 	}
 }
